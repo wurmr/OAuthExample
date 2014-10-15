@@ -1,0 +1,24 @@
+{
+  "name": "OAuthExample",
+  "version": "0.0.1",
+  "description": "Example API Layer uses OAuth for authentication",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wurmr/OAuthExample.git"
+  },
+  "keywords": [
+    "oauth",
+    "nodejs",
+    "api"
+  ],
+  "author": "Jim Karg",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wurmr/OAuthExample/issues"
+  },
+  "homepage": "https://github.com/wurmr/OAuthExample"
+}
