@@ -1,0 +1,6 @@
+{
+  "googleApi": {
+    "clientID": "--PutYourKeyHere--",
+    "clientSecret": "--PutYourSecretHere--"
+  }
+}
