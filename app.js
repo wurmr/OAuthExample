@@ -8,12 +8,11 @@ var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/user');
-var auth = require('./routes/auth');
 var config = require('config');
 
 // Passport Setup
 var passport = require('passport'),
-  GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+  GoogleTokenStrategy = require('passport-google-token').Strategy;
 
 passport.serializeUser(function(user, done) {
   done(null, user);
@@ -23,26 +22,12 @@ passport.deserializeUser(function(obj, done) {
   done(null, obj);
 });
 
-console.log(config.get('googleApi.clientID'));
-
-// Use the GoogleStrategy within Passport.
-//   Strategies in passport require a `validate` function, which accept
-//   credentials (in this case, an OpenID identifier and profile), and invoke a
-//   callback with a user object.
-passport.use(new GoogleStrategy({
+passport.use(new GoogleTokenStrategy({
     clientID: config.get('googleApi.clientID'),
-    clientSecret: config.get('googleApi.clientSecret'),
-    callbackURL: "http://127.0.0.1:3000/auth/google/callback"
+    clientSecret: config.get('googleApi.clientSecret')
   },
   function(accessToken, refreshToken, profile, done) {
-    process.nextTick(function() {
-
-      // To keep the example simple, the user's Google profile is returned to
-      // represent the logged-in user.  In a typical application, you would want
-      // to associate the Google account with a user record in your database,
-      // and return that user instead.
-      return done(null, profile);
-    });
+    return done(null, profile._json)
   }
 ));
 
@@ -60,7 +45,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(cookieParser());
+//app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({
   secret: 'keyboard cat'
@@ -71,7 +56,6 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/auth', auth);
 
 /// catch 404 and forward to error handler
 app.use(function(req, res, next) {

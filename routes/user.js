@@ -1,14 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var authentication = require('../authentication');
+var passport = require('passport');
 
-/* GET users listing. */
-router.get('/', function(req, res) {
-  res.send('respond with a resource');
-});
-
-router.get('/me', authentication.ensureAuthenticated, function(req, res) {
-  res.send(req.user._json);
+router.get('/me', passport.authenticate('google-token', {
+  session: false
+}), function(req, res) {
+  res.send(req.user);
 });
 
 module.exports = router;
