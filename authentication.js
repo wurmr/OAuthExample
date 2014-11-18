@@ -29,14 +29,17 @@ module.exports = {
       return
     };
 
-    /** Validation Code, Works if certs are signed correctly */
-
-
     saml.parse(token, function(err, profile) {
+      if (err) {
+        res.send(403, { message: err.message });
+        return;
+      }
+
       req.user = profile.claims;
       next();
     });
 
+    /** Validation Code, Works if certs are signed correctly */
     /**
     var options = {
       //thumbprint: '3648D5858403AD0094D8EC051F0497A3'

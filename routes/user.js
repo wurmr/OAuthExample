@@ -1,8 +1,6 @@
-var express = require('express');
-var router = express.Router();
+var router = require('express').Router();
 var authentication = require('../authentication');
 var passport = require('passport');
-var saml = require('saml20');
 
 router.get('/me', passport.authenticate('google-token', {
   session: false
@@ -10,7 +8,7 @@ router.get('/me', passport.authenticate('google-token', {
   res.send(req.user);
 });
 
-router.post('/me/saml', authentication.ensureSaml2, function(req, res) {
+router.get('/me/saml', authentication.ensureSaml2, function(req, res) {
   res.send(req.user);
 });
 
