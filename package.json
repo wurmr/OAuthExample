@@ -36,7 +36,7 @@
     "passport": "^0.2.1",
     "passport-google-token": "git://github.com/wurmr/passport-google-token.git",
     "passport-wsfed-saml2": "^0.19.0",
-    "saml20": "^0.1.9",
+    "saml20": "git://github.com/IntertechInc/saml20.git",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {
