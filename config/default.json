@@ -2,5 +2,9 @@
   "googleApi": {
     "clientID": "--PutYourKeyHere--",
     "clientSecret": "--PutYourSecretHere--"
+  },
+  "samlSettings": {
+    "thumbprint": "--PutYourThumbPrintHere--",
+    "audience": "--PutYourHostNameHere--"
   }
 }
